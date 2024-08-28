@@ -28,10 +28,10 @@ jobs:
       - name: push README to Dockerhub
         uses: christian-korneck/update-container-description-action@v1
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_HUB_README_USERNAME }}
-          DOCKER_PASS: ${{ secrets.DOCKER_HUB_README_PASSWORD }}
+          DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_PASS: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         with:
           destination_container_repo: serversideup/proftpd
           provider: dockerhub
-          short_description: 'A simple and lightweight mkpasswd image based on Alpine. Great for generating password hashes.'
+          short_description: 'A simple and lightweight ProFTPD image based on Ubuntu 22.04. If you are a poor soul like us who needed a FTP server for a legacy integration, this might be for you.'
           readme_file: 'README.md'
