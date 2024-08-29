@@ -1,21 +1,22 @@
 FROM ubuntu:24.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG FTP_USER=proftpd_user
+ARG FTP_GROUP=nogroup
+ARG FTP_SSL_CERTS_DIR=/etc/ssl/ftp
+ARG FTP_USERS_DIR=/var/ftp/users
 
-ARG FTP_USER=proftpd_user \
-    FTP_GROUP=nogroup \
-    FTP_SSL_CERTS_DIR=/etc/ssl/ftp \
-    FTP_USERS_DIR=/var/ftp/users \
+ENV DEBIAN_FRONTEND=noninteractive \
+    FTP_DEBUG_LEVEL=0 \
+    FTP_LOG_LEVEL=warn \
     FTP_MASQUERADE_ADDRESS= \
     FTP_SQL_USERS_TABLE=ftpusers \
+    FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
+    FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key \
     MYSQL_DATABASE=ftpdb \
     MYSQL_HOST=mysql \
+    MYSQL_PASSWORD=ftppassword \
     MYSQL_PORT=3306 \
-    MYSQL_USER=ftpuser \
-    MYSQL_PASSWORD=ftppassword
-
-ENV FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
-    FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key
+    MYSQL_USER=ftpuser
 
 # Update and install required packages
 RUN apt-get update && apt-get install -y \
