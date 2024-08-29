@@ -36,7 +36,7 @@ The following environment variables can be used to customize the ProFTPD server:
 | `FTP_SSL_CERTS_DIR` | Directory for SSL certificates | /etc/ssl/ftp |
 | `FTP_USERS_DIR` | Base directory for user homes | /var/ftp/users |
 | `FTP_MASQUERADE_ADDRESS` | IP address or hostname for passive mode connections | - |
-| `FTP_SQL_USERS_TABLE` | MySQL table to authenticate users against | users |
+| `FTP_SQL_USERS_TABLE` | MySQL table to authenticate users against | ftpusers |
 | `MYSQL_DATABASE` | MySQL database name | ftpdb |
 | `MYSQL_HOST` | MySQL host | mysql |
 | `MYSQL_PORT` | MySQL port | 3306 |
