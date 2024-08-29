@@ -107,7 +107,7 @@ The following ports are exposed:
 You can use either MySQL or MariaDB. Create a table in the database with the following SQL:
 
 ```sql
-CREATE TABLE users (
+CREATE TABLE ftpusers (
     id INT AUTO_INCREMENT PRIMARY KEY,  -- Auto-incrementing primary key
     username VARCHAR(255) NOT NULL,     -- Username, max length 255 characters
     password VARCHAR(255) NOT NULL,     -- Password, max length 255 characters
@@ -121,7 +121,7 @@ CREATE TABLE users (
 Then you can add users to the database with the following SQL:
 
 ```sql
-INSERT INTO users (username, password, uid, gid, homedir, shell)
+INSERT INTO ftpusers (username, password, uid, gid, homedir, shell)
 VALUES (
   'testuser',
   CONCAT('{sha256}', TO_BASE64(UNHEX(SHA2('mypassword', 256)))),
