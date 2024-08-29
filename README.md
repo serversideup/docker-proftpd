@@ -16,6 +16,10 @@
 
 This Docker image provides a customizable ProFTPD server with MySQL authentication support and TLS encryption.
 
+| Docker Image | Size |
+|--------------|------|
+| [**serversideup/proftpd**](https://hub.docker.com/r/serversideup/proftpd) | [![Docker Image Size](https://img.shields.io/docker/image-size/serversideup/proftpd/latest?style=flat-square)](https://hub.docker.com/r/serversideup/proftpd) |
+
 ## Base Image
 The image is based on `ubuntu:24.04`, providing a stable and up-to-date environment for running ProFTPD.
 
