@@ -21,7 +21,7 @@ The image is based on `ubuntu:24.04`, providing a stable and up-to-date environm
 
 ## Features
 - ProFTPD server with MySQL authentication
-- TLS encryption support
+- TLS encryption support (forced on by default)
 - Customizable configuration via environment variables
 - Self-signed SSL certificate generation
 
@@ -76,7 +76,7 @@ Make sure to replace the MySQL connection details with your own.
 
 The ProFTPD configuration file (`proftpd.conf`) is included in the image. It sets up the following:
 
-- FTP and FTPS (TLS) support
+- FTP and FTPS (TLS) support (forced to TLS by default)
 - MySQL authentication
 - Passive port range: 60000-60100
 - TLS Protocol: TLSv1.2 and TLSv1.3
