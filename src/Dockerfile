@@ -32,7 +32,8 @@ COPY proftpd.conf /etc/proftpd/proftpd.conf
 RUN useradd -r -s /bin/false ${FTP_USER}
 
 # Create a directory for FTP and set permissions
-RUN mkdir -p /var/ftp && \
+RUN mkdir -p /var/ftp/ && \
+    touch /var/ftp/ban.tab && \
     chown -R ${FTP_USER}:${FTP_GROUP} /var/ftp
 
 # Generate self-signed SSL certificate
