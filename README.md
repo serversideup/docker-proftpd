@@ -24,7 +24,6 @@ The image is based on `ubuntu:24.04`, providing a stable and up-to-date environm
 - TLS encryption support
 - Customizable configuration via environment variables
 - Self-signed SSL certificate generation
-- Health check for container status monitoring
 
 ## Environment Variables
 
@@ -132,17 +131,6 @@ VALUES (
   '/bin/false'
 );
 ```
-
-## Healthcheck
-
-The container includes a healthcheck that verifies if the ProFTPD server is running on port 21. The healthcheck configuration is as follows:
-
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD nc -z localhost 21 || exit 1
-```
-
-This checks the ProFTPD service every 30 seconds, with a 10-second timeout and 3 retries before marking the container as unhealthy.
 
 ## Resources
 - **[Discord](https://serversideup.net/discord)** for friendly support from the community and the team.

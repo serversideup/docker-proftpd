@@ -54,6 +54,3 @@ EXPOSE 21 990 60000-60100
 
 # Start ProFTPD
 CMD ["proftpd", "--nodaemon"]
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD nc -z localhost 21 || exit 1
