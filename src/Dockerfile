@@ -7,12 +7,12 @@ ARG FTP_USER=proftpd_user \
     FTP_SSL_CERTS_DIR=/etc/ssl/ftp \
     FTP_USERS_DIR=/var/ftp/users \
     FTP_MASQUERADE_ADDRESS= \
+    FTP_SQL_USERS_TABLE=ftpusers \
     MYSQL_DATABASE=ftpdb \
     MYSQL_HOST=mysql \
     MYSQL_PORT=3306 \
     MYSQL_USER=ftpuser \
-    MYSQL_PASSWORD=ftppassword \
-    MYSQL_TABLE=ftpusers
+    MYSQL_PASSWORD=ftppassword
 
 ENV FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
     FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key
