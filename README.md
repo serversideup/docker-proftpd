@@ -42,6 +42,7 @@ The following environment variables can be used to customize the ProFTPD server:
 | `MYSQL_PORT` | MySQL port | 3306 |
 | `MYSQL_USER` | MySQL user | ftpuser |
 | `MYSQL_PASSWORD` | MySQL password | ftppassword |
+| `MYSQL_TABLE` | MySQL table name | users |
 
 ## Usage
 

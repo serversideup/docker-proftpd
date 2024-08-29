@@ -11,7 +11,8 @@ ARG FTP_USER=proftpd_user \
     MYSQL_HOST=mysql \
     MYSQL_PORT=3306 \
     MYSQL_USER=ftpuser \
-    MYSQL_PASSWORD=ftppassword
+    MYSQL_PASSWORD=ftppassword \
+    MYSQL_TABLE=ftpusers
 
 ENV FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
     FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key
