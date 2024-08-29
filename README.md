@@ -121,6 +121,40 @@ The following ports are exposed:
 | 990 | FTPS (FTP over TLS) |
 | 60000-60100 | Passive port range |
 
+### Special Note on orchestrators
+If you are using an orchestrator like Kubernetes, you will need to ensure that the ports are opened on the container and the host.
+
+For example, for Docker Swarm you need to use the long format for the `ports` directive in your docker compose file:
+
+```yml
+services:
+  ftp:
+    image: serversideup/proftpd
+    ports:
+      - target: 21
+        published: 21
+        protocol: tcp
+        mode: host
+      - target: 990
+        published: 990
+        protocol: tcp
+        mode: host
+      - target: 60000
+        published: 60000
+        protocol: tcp
+        mode: host
+      - target: 60001
+        published: 60001
+        protocol: tcp
+        mode: host
+      - target: 60002
+        published: 60002
+        protocol: tcp
+        mode: host
+```
+
+Unfortunately, Docker Swarm does not support specifying ranges for published ports with the long format, so you need to specify each port individually. Just be sure to open all ports within the range that you define within the `FTP_PASSIVE_PORT_RANGE_START` and `FTP_PASSIVE_PORT_RANGE_END` environment variables.
+
 ## MySQL Database
 You can use either MySQL or MariaDB. Create a table in the database with the following SQL:
 
