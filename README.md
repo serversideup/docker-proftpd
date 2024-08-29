@@ -39,6 +39,8 @@ The following environment variables can be used to customize the ProFTPD server:
 | `FTP_DEBUG_LEVEL` | Sets the debug level for ProFTPD | 0 |
 | `FTP_LOG_LEVEL` | Sets the syslog level for ProFTPD | warn |
 | `FTP_MASQUERADE_ADDRESS` | IP address or hostname for passive mode connections | - |
+| `FTP_PASSIVE_PORT_RANGE_START` | Start of the passive port range | 60000 |
+| `FTP_PASSIVE_PORT_RANGE_END` | End of the passive port range | 60100 |
 | `FTP_SQL_USERS_TABLE` | MySQL table to authenticate users against | ftpusers |
 | `FTP_SSL_CERTS_DIR` | Directory for SSL certificates | /etc/ssl/ftp |
 | `FTP_USER` | ProFTPD user | proftpd_user |
