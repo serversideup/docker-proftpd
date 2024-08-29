@@ -28,6 +28,7 @@ The image is based on `ubuntu:24.04`, providing a stable and up-to-date environm
 - TLS encryption support (forced on by default)
 - Customizable configuration via environment variables
 - Self-signed SSL certificate generation
+- IP address banning (bans IP addresses for 1 hour that fail authentication 5 times in 10 minutes)
 
 ## Environment Variables
 
@@ -87,7 +88,7 @@ The ProFTPD configuration file (`proftpd.conf`) is included in the image. It set
 - Logging configuration
 - Home directory creation for users
 - Anonymous access disabled
-
+- IP address banning (bans IP addresses for 1 hour that fail authentication 5 times in 10 minutes)
 You can modify the `proftpd.conf` file to further customize the ProFTPD server according to your needs.
 
 ## Security Considerations
