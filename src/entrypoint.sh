@@ -7,5 +7,15 @@ if [ ! -f "$FTP_TLS_CERTIFICATE_FILE" ] || [ ! -f "$FTP_TLS_CERTIFICATE_KEY_FILE
 else
   echo "ℹ️ NOTICE: SSL certificate and private key already exist, so we'll use the existing files."
 fi
+
+if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
+    echo "ℹ️ FTP_MASQUERADE_ADDRESS is set. Adding MasqueradeAddress to proftpd.conf..."
+    echo "" >> /etc/proftpd/proftpd.conf
+    echo "MasqueradeAddress %{env:FTP_MASQUERADE_ADDRESS}" >> /etc/proftpd/proftpd.conf
+    echo "✅ MasqueradeAddress added to proftpd.conf"
+else
+    echo "ℹ️ FTP_MASQUERADE_ADDRESS is not set. Skipping MasqueradeAddress configuration."
+fi
+
 echo "🚀 Starting ProFTPD..."
 exec "$@"
