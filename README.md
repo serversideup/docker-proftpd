@@ -25,7 +25,7 @@ The image is based on `ubuntu:24.04`, providing a stable and up-to-date environm
 
 ## Features
 - ProFTPD server with MySQL authentication
-- TLS encryption support (forced on by default)
+- TLS encryption support
 - Customizable configuration via environment variables
 - Self-signed SSL certificate generation
 - IP address banning (bans IP addresses for 1 hour that fail authentication 5 times in 10 minutes)
@@ -42,9 +42,9 @@ The following environment variables can be used to customize the ProFTPD server:
 | `FTP_PASSIVE_PORT_RANGE_START` | Start of the passive port range | 60000 |
 | `FTP_PASSIVE_PORT_RANGE_END` | End of the passive port range | 60100 |
 | `FTP_SQL_USERS_TABLE` | MySQL table to authenticate users against | ftpusers |
-| `FTP_SSL_CERTS_DIR` | Directory for SSL certificates | /etc/ssl/ftp |
-| `FTP_USER` | ProFTPD user | proftpd_user |
-| `FTP_USERS_DIR` | Base directory for user homes | /var/ftp/users |
+| `FTP_TLS_CERTIFICATE_FILE` | SSL certificate file | /etc/ssl/ftp/proftpd.crt |
+| `FTP_TLS_CERTIFICATE_KEY_FILE` | SSL certificate key file | /etc/ssl/ftp/proftpd.key |
+| `FTP_TLS_REQUIRED` | Require TLS | off |
 | `MYSQL_DATABASE` | MySQL database name | ftpdb |
 | `MYSQL_HOST` | MySQL host | mysql |
 | `MYSQL_PASSWORD` | MySQL password | ftppassword |
@@ -94,7 +94,7 @@ Make sure to replace the MySQL connection details with your own.
 
 The ProFTPD configuration file (`proftpd.conf`) is included in the image. It sets up the following:
 
-- FTP and FTPS (TLS) support (forced to TLS by default)
+- FTP and FTPS (TLS) support
 - MySQL authentication
 - Passive port range: 60000-60100
 - TLS Protocol: TLSv1.2 and TLSv1.3

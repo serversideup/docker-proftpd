@@ -14,6 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     FTP_SQL_USERS_TABLE=ftpusers \
     FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
     FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key \
+    FTP_TLS_REQUIRED=off \
     MYSQL_DATABASE=ftpdb \
     MYSQL_HOST=mysql \
     MYSQL_PASSWORD=ftppassword \
