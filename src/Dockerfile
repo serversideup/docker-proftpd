@@ -37,21 +37,17 @@ RUN useradd -r -s /bin/false ${FTP_USER}
 # Create a directory for FTP and set permissions
 RUN mkdir -p /var/ftp/ && \
     touch /var/ftp/ban.tab && \
-    chown -R ${FTP_USER}:${FTP_GROUP} /var/ftp
-
-# Generate self-signed SSL certificate
-RUN mkdir -p ${FTP_SSL_CERTS_DIR} && \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout ${FTP_TLS_CERTIFICATE_KEY_FILE} \
-    -out ${FTP_TLS_CERTIFICATE_FILE} \
-    -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost" && \
-    chmod 600 ${FTP_TLS_CERTIFICATE_KEY_FILE} && \
-    chown -R ${FTP_USER}:${FTP_GROUP} ${FTP_SSL_CERTS_DIR}
+    chown -R ${FTP_USER}:${FTP_GROUP} /var/ftp && \
+    mkdir -p ${FTP_SSL_CERTS_DIR}
 
 # Create a base directory for user homes
 RUN mkdir -p ${FTP_USERS_DIR} && \
     chown ${FTP_USER}:${FTP_GROUP} ${FTP_USERS_DIR} && \
     chmod 755 ${FTP_USERS_DIR}
+
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Expose FTP ports (FTP, FTPS, Passive Ports)
 EXPOSE 21 990 60000-60100
