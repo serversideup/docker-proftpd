@@ -13,6 +13,13 @@ if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
     echo "" >> /etc/proftpd/proftpd.conf
     echo "MasqueradeAddress %{env:FTP_MASQUERADE_ADDRESS}" >> /etc/proftpd/proftpd.conf
     echo "✅ MasqueradeAddress added to proftpd.conf"
+
+    if [ -d "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS" ]; then
+        echo "ℹ️ Let's Encrypt SSL certificate found. Setting proper permissions..."
+        chown -R proftpd:proftpd "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
+        chmod -R 640 "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
+        echo "✅ Let's Encrypt SSL certificate permissions set"
+    fi
 else
     echo "ℹ️ FTP_MASQUERADE_ADDRESS is not set. Skipping MasqueradeAddress configuration."
 fi
