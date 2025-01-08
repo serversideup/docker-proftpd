@@ -18,7 +18,9 @@ if [ ! -f "$FTP_TLS_CERTIFICATE_FILE" ] || [ ! -f "$FTP_TLS_CERTIFICATE_KEY_FILE
     chmod 600 "${FTP_TLS_CERTIFICATE_KEY_FILE}"
     echo "✅ SSL Keypair generated..."
 else
-  echo "ℹ️ NOTICE: SSL certificate and private key already exist, so we'll use the existing files."
+  echo "ℹ️ NOTICE: SSL certificate and private key already exist, so we'll be using the following files:"
+  echo "  - ${FTP_TLS_CERTIFICATE_FILE}"
+  echo "  - ${FTP_TLS_CERTIFICATE_KEY_FILE}"
 fi
 
 if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
