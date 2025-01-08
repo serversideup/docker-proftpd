@@ -29,7 +29,7 @@ if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
 
     if [ -d "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS" ]; then
         echo "ℹ️ Let's Encrypt SSL certificate found. Setting proper permissions..."
-        chown -R proftpd "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
+        chown -R "${FTP_USER}" "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
         chmod -R 640 "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
         echo "✅ Let's Encrypt SSL certificate permissions set"
     fi
