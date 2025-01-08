@@ -45,6 +45,8 @@ The following environment variables can be used to customize the ProFTPD server:
 | `FTP_TLS_CERTIFICATE_FILE` | SSL certificate file | /etc/ssl/ftp/proftpd.crt |
 | `FTP_TLS_CERTIFICATE_KEY_FILE` | SSL certificate key file | /etc/ssl/ftp/proftpd.key |
 | `FTP_TLS_REQUIRED` | Require TLS | off |
+| `FTP_TLS_WAIT_FOR_CERTIFICATE` | Wait for the SSL certificate to be generated (helpful if you're using something like Let's Encrypt to generate the certificate) | false |
+| `FTP_TLS_WAIT_TIMEOUT` | Timeout for waiting for the SSL certificate to be generated | 60 |
 | `MYSQL_DATABASE` | MySQL database name | ftpdb |
 | `MYSQL_HOST` | MySQL host | mysql |
 | `MYSQL_PASSWORD` | MySQL password | ftppassword |
