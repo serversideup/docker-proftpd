@@ -1,4 +1,4 @@
-name: Docker Publish
+name: Docker Publish (Production)
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  ssh:
+  build:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       tags: "serversideup/proftpd:latest"
