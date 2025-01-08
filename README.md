@@ -29,6 +29,7 @@ The image is based on `ubuntu:24.04`, providing a stable and up-to-date environm
 - Customizable configuration via environment variables
 - Self-signed SSL certificate generation
 - IP address banning (bans IP addresses for 1 hour that fail authentication 5 times in 10 minutes)
+- Native Docker healthchecks to ensure the server is running
 
 ## Environment Variables
 
