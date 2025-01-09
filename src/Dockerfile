@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+# check=skip=SecretsUsedInArgOrEnv
 FROM ubuntu:24.04
 
 ARG FTP_USER=proftpd_user
