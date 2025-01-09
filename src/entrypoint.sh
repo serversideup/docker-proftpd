@@ -4,14 +4,17 @@ if [ ! -f "$FTP_TLS_CERTIFICATE_FILE" ] || [ ! -f "$FTP_TLS_CERTIFICATE_KEY_FILE
         echo "🔐 SSL Keypair not found. Waiting for certificate to be generated (timeout: ${FTP_TLS_WAIT_TIMEOUT}s)..."
         timeout_counter=0
         while [ ! -f "$FTP_TLS_CERTIFICATE_FILE" ] || [ ! -f "$FTP_TLS_CERTIFICATE_KEY_FILE" ]; do
+            remaining=$((FTP_TLS_WAIT_TIMEOUT - timeout_counter))
+            echo -ne "\r⏳ Waiting... ${remaining}s remaining"
             sleep 1
             timeout_counter=$((timeout_counter + 1))
             if [ $timeout_counter -ge "$FTP_TLS_WAIT_TIMEOUT" ]; then
-                echo "ERROR: Timeout reached while waiting for SSL certificate."
+                echo -e "\n❌ ERROR: Timeout reached while waiting for SSL certificate."
                 echo "No file found at ${FTP_TLS_CERTIFICATE_FILE} or ${FTP_TLS_CERTIFICATE_KEY_FILE}. Exiting..."
                 exit 1
             fi
         done
+        echo -e "\n✅ Certificate files found!"
     else
         echo "🔐 SSL Keypair not found. Generating self-signed SSL keypair..."    
         openssl req -x509 -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost" -nodes -newkey rsa:2048 -keyout "$FTP_TLS_CERTIFICATE_KEY_FILE" -out "$FTP_TLS_CERTIFICATE_FILE" -days 365 >/dev/null 2>&1
