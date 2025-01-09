@@ -27,6 +27,12 @@ else
   echo "  - ${FTP_TLS_CERTIFICATE_KEY_FILE}"
 fi
 
+if [ "$FTP_TLS_REQUIRED" = "on" ]; then
+  echo "🔐 FTP_TLS_REQUIRED is set to 'on'. This means that the FTP server will only accept connections over TLS."
+else
+  echo "🔓 FTP_TLS_REQUIRED is set to 'off'. This means that the FTP server will accept connections over both TLS and non-TLS."
+fi
+
 if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
     echo "ℹ️ FTP_MASQUERADE_ADDRESS is set. Adding MasqueradeAddress to proftpd.conf..."
     echo "" >> /etc/proftpd/proftpd.conf
