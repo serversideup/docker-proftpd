@@ -66,29 +66,70 @@ The following build arguments are used during the image build process:
 | `FTP_USERS_DIR` | Base directory for user homes | /var/ftp/users |
 
 ## Usage
+If you want to use Let's Encrypt with ProFTPD + CloudFlare + MySQL authentication, you can also include our other image [serversideup/certbot-dns-cloudflare](https://github.com/serversideup/docker-certbot-dns-cloudflare) to automatically generate the SSL certificates and share it with the ProFTPD container.
 
-1. Build the Docker image:
-
-```bash
-docker build -t proftpd-mysql .
-```
-
-2. Run the container:
+Here is an a full example configuration of how to use the ProFTPD image with Let's Encrypt. Just set your the environment variables to match your set up and you're good to go:
 
 ```yml
 services:
-  proftpd:
-    image: serversideup/proftpd
-    ports:
-      - "21:21"
-      - "990:990"
-      - "60000-60100:60000-60100"
+  certbot:
+    image: serversideup/certbot-dns-cloudflare:latest
+    volumes:
+      - certbot_data:/etc/letsencrypt
     environment:
-      - MYSQL_HOST=your_mysql_host
-      - MYSQL_DATABASE=your_database
-      - MYSQL_USER=your_user
-      - MYSQL_PASSWORD=your_password
-      - FTP_MASQUERADE_ADDRESS=your_masquerade_address
+      CLOUDFLARE_API_TOKEN: "${CERTBOT_CLOUDFLARE_API_TOKEN}"
+      CERTBOT_EMAIL: "${CERTBOT_EMAIL}"
+      CERTBOT_DOMAINS: "${FTP_SERVER}"
+      CERTBOT_KEY_TYPE: "rsa"
+      PUID: "999"
+      PGID: "999"
+  ftp:
+    volumes:
+      - ftp_data:/var/ftp/users
+      - ftp_logs:/var/log/proftpd
+      - certbot_data:/etc/letsencrypt
+    environment:
+      FTP_DEBUG_LEVEL: "0" # 0-10 (10 = most verbose)
+      FTP_LOG_LEVEL: "info" # debug, info, warn, error
+      FTP_MASQUERADE_ADDRESS: "${FTP_SERVER}"
+      FTP_PASSIVE_PORT_RANGE_START: "60000"
+      FTP_PASSIVE_PORT_RANGE_END: "60049"
+      FTP_SQL_USERS_TABLE: "users"
+      FTP_TLS_CERTIFICATE_FILE: "/etc/letsencrypt/live/${FTP_SERVER}/fullchain.pem"
+      FTP_TLS_CERTIFICATE_KEY_FILE: "/etc/letsencrypt/live/${FTP_SERVER}/privkey.pem"
+      FTP_TLS_WAIT_FOR_CERTIFICATE: "true"
+      MYSQL_DATABASE: "${FTPUSER_DATABASE}"
+      MYSQL_HOST: "${FTPUSER_HOST}"
+      MYSQL_PASSWORD: "${FTPUSER_PASSWORD}"
+      MYSQL_PORT: "${FTPUSER_PORT}"
+      MYSQL_USER: "${FTPUSER_USERNAME}"
+    depends_on:
+      - certbot
+    ports:
+      - target: 21
+        published: 21
+        protocol: tcp
+        mode: host
+      - target: 990
+        published: 990
+        protocol: tcp
+        mode: host
+      - target: 60000
+        published: 60000
+        protocol: tcp
+        mode: host
+      - target: 60001
+        published: 60001
+        protocol: tcp
+        mode: host
+      - target: 60002
+        published: 60002
+        protocol: tcp
+        mode: host
+volumes:
+  ftp_logs:
+  ftp_data:
+  certbot_data:
 ```
 
 Make sure to replace the MySQL connection details with your own.
