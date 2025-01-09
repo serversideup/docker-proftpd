@@ -2,7 +2,7 @@
 		<img src="https://raw.githubusercontent.com/serversideup/docker-proftpd/main/.github/header.png" width="1200" alt="Docker Images Logo">
 </p>
 <p align="center">
-	<a href="https://github.com/serversideup/docker-certbot-dns-cloudflare/actions/workflows/publish_docker-images-production.yml"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/serversideup/docker-proftpd/.github%2Fworkflows%2Fpublish_docker-images-production.yml" /></a>
+	<a href="https://github.com/serversideup/docker-proftpd/actions/workflows/publish_docker-images-production.yml"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/serversideup/docker-proftpd/.github%2Fworkflows%2Fpublish_docker-images-production.yml" /></a>
 	<a href="https://github.com/serversideup/docker-proftpd/blob/main/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/docker-proftpd" alt="License"></a>
 	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 	<a href="https://community.serversideup.net"><img alt="Discourse users" src="https://img.shields.io/discourse/users?color=blue&server=https%3A%2F%2Fcommunity.serversideup.net"></a>
