@@ -94,6 +94,7 @@ services:
       FTP_MASQUERADE_ADDRESS: "${FTP_SERVER}"
       FTP_PASSIVE_PORT_RANGE_START: "60000"
       FTP_PASSIVE_PORT_RANGE_END: "60049"
+      FTP_TLS_REQUIRED: "on"
       FTP_SQL_USERS_TABLE: "users"
       FTP_TLS_CERTIFICATE_FILE: "/etc/letsencrypt/live/${FTP_SERVER}/fullchain.pem"
       FTP_TLS_CERTIFICATE_KEY_FILE: "/etc/letsencrypt/live/${FTP_SERVER}/privkey.pem"
