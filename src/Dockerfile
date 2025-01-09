@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y \
     proftpd-mod-mysql \
     openssl \
     netcat-traditional \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy configuration files
@@ -63,7 +64,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 21 990 60000-60100
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD nc -z localhost 21 || exit 1
+    CMD pgrep proftpd || exit 1
 
 # Start ProFTPD
 CMD ["proftpd", "--nodaemon"]
