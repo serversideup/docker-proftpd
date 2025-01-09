@@ -36,16 +36,10 @@ if [ -n "$FTP_MASQUERADE_ADDRESS" ]; then
     if [ -d "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS" ]; then
         echo "ℹ️ Let's Encrypt SSL certificate found. Checking permissions..."
         current_owner=$(stat -c '%U' "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS")
-        current_perms=$(stat -c '%a' "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS")
         
         if [ "$current_owner" != "$FTP_USER" ]; then
             echo "Updating ownership to ${FTP_USER}..."
             chown -R "${FTP_USER}" "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
-        fi
-        
-        if [ "$current_perms" != "640" ]; then
-            echo "Updating permissions to 640..."
-            chmod -R 640 "/etc/letsencrypt/live/$FTP_MASQUERADE_ADDRESS"
         fi
         
         echo "✅ Let's Encrypt SSL certificate permissions verified"
