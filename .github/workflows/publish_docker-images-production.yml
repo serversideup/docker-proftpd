@@ -2,9 +2,8 @@ name: Docker Publish (Production)
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  release:
+    types: [released]
   schedule:
     - cron: '0 8 * * 2'
 
@@ -13,25 +12,5 @@ jobs:
   build:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
-      tags: "serversideup/proftpd:latest"
+      tags: "serversideup/proftpd:latest,serversideup/proftpd:${{ github.ref_name }}"
     secrets: inherit
-
-  update_container_readme:
-    runs-on: ubuntu-20.04
-    name: Push README to Docker Hub
-    steps:
-      - name: git checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: push README to Dockerhub
-        uses: christian-korneck/update-container-description-action@v1
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_HUB_README_USERNAME }}
-          DOCKER_PASS: ${{ secrets.DOCKER_HUB_README_PASSWORD }}
-        with:
-          destination_container_repo: serversideup/proftpd
-          provider: dockerhub
-          short_description: 'Lightweight ProFTPD on Ubuntu 22.04. For poor souls stuck with FTP. You are not alone!'
-          readme_file: 'README.md'
