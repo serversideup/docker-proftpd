@@ -16,6 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     FTP_SQL_USERS_TABLE=ftpusers \
     FTP_TLS_CERTIFICATE_FILE=/etc/ssl/ftp/proftpd.crt \
     FTP_TLS_CERTIFICATE_KEY_FILE=/etc/ssl/ftp/proftpd.key \
+    FTP_TLS_CERT_TYPE=rsa \
     FTP_TLS_REQUIRED=off \
     FTP_TLS_WAIT_FOR_CERTIFICATE=false \
     FTP_TLS_WAIT_TIMEOUT=60 \
@@ -41,6 +42,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy configuration files
 COPY proftpd.conf /etc/proftpd/proftpd.conf
+COPY conf.d/ /etc/proftpd/conf.d/
 
 # Create a user for ProFTPD
 RUN useradd -r -s /bin/false ${FTP_USER}
